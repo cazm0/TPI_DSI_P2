@@ -1,2 +1,1 @@
-# TPI_DSI_P2
-Pantallas con navegación del tpi
+Una vez clonado el repositorio, ir a la carpeta src y ejecutar npm install en una terminal
