@@ -14,6 +14,7 @@
     justify-content: space-between; /* Distribuye los elementos */
     align-items: center; /* Alinea verticalmente */
     width: 100%; /* Asegura que ocupe todo el ancho */
+    height: 100%;
     box-sizing: border-box; /* Asegura que padding no afecte al tamaño */
   }
 

@@ -67,8 +67,11 @@
         <option value="Moto">Moto</option>
         <option value="Otros">Otros</option>
       </select>
-  
-      <button type="submit" class="btn-save">Guardar Turno</button>
+      <div class="button-group">
+        
+        <a href="/turnos" class="btn-cancel">Cancelar</a>
+        <button type="submit" class="btn-save">Guardar Turno</button>
+      </div>
     </form>
   </div>
   
@@ -110,17 +113,34 @@
       border-radius: 4px;
     }
   
+    .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    }
     .btn-save {
-      background-color: #4CAF50;
+      background-color: #007BFF;
       color: white;
-      padding: 0.5rem;
+      padding: 0.7rem;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
   
     .btn-save:hover {
-      background-color: #45a049;
+      background-color: #0056b3;
+    }
+    .btn-cancel {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .btn-cancel:hover {
+    background-color: #e53935;
     }
   
     /* Estilo del popup */

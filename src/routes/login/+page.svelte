@@ -17,7 +17,9 @@
   </script>
   <main class="login-background">
   <div class="login-container">
-    <img src={logo} alt="Logo" class="logo"/>
+    <a href="/" class="logo-link">
+      <img src={logo} alt="Logo" class="logo" />
+    </a>
     <h1 class="title">Inicio de Sesión</h1>
   
     <form on:submit|preventDefault={handleLogin}>
