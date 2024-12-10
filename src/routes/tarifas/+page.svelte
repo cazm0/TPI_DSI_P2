@@ -1,6 +1,8 @@
 <script>
     import { onMount } from 'svelte';
-    import { goto } from '$app/navigation'
+    onMount(() => {
+    document.title = 'Tarifas';
+    });
     import Navbar from "../../components/layout/Navbar.svelte";
     const volverAlMenu = () => {
     window.location.href = ''; // La raíz del sitio
@@ -28,9 +30,5 @@
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     color: #333;
-  }
-
-  button:hover {
-    background: #3f8d87;
   }
 </style>

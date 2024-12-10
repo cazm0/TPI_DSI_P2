@@ -1,72 +1,81 @@
 <script>
-    import { goto } from '$app/navigation'; // Para redirigir
-    import logo from '$lib/../public/SART.png';
-    import { onMount } from 'svelte';
-    let email = '';
-    let password = '';
-    let errorMessage = '';
-  
-    // Función para manejar el inicio de sesión
-    function handleLogin() {
-      if (email && password) {
-        goto('/'); // Redirige al inicio si los campos no están vacíos
-      } else {
-        errorMessage = 'Por favor, complete todos los campos.';
-      }
+  import { goto } from '$app/navigation'; // Para redirigir
+  import logo from '$lib/../public/SART.png';
+  import { onMount } from 'svelte';
+    onMount(() => {
+    document.title = 'Iniciar Sesión';
+    });
+  import { isLoggedIn } from '$lib/stores';
+  let email = '';
+  let password = '';
+  let errorMessage = '';
+
+  // Función para manejar el inicio de sesión
+  function handleLogin() {
+    if (email && password) {
+      // Cuando los campos son completos, actualizamos el store a 'true'
+      isLoggedIn.set(true); // Cambia el estado de isLoggedIn
+
+      // Redirige al inicio después de iniciar sesión correctamente
+      goto('/'); 
+    } else {
+      errorMessage = 'Por favor, complete todos los campos.';
     }
-  </script>
-  <main class="login-background">
-  <div class="login-container">
-    <a href="/" class="logo-link">
-      <img src={logo} alt="Logo" class="logo" />
+  }
+</script>
+
+<main class="bg-blue-900 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+    <a href="/" class="flex justify-center mb-6">
+      <img src={logo} alt="Logo" class="w-36 h-auto" />
     </a>
-    <h1 class="title">Inicio de Sesión</h1>
-  
-    <form on:submit|preventDefault={handleLogin}>
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" bind:value={email} placeholder="Ingrese su correo" required />
-  
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" bind:value={password} placeholder="Ingrese su contraseña" required />
+    <h1 class="text-2xl font-semibold text-center text-gray-800 mb-6">Inicio de Sesión</h1>
+
+    <form on:submit|preventDefault={handleLogin} class="space-y-4">
+      <div>
+        <label for="email" class="block text-gray-600 mb-2">Correo electrónico:</label>
+        <input
+          type="email"
+          id="email"
+          bind:value={email}
+          placeholder="Ingrese su correo"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      
+      <div>
+        <label for="password" class="block text-gray-600 mb-2">Contraseña:</label>
+        <input
+          type="password"
+          id="password"
+          bind:value={password}
+          placeholder="Ingrese su contraseña"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
   
       {#if errorMessage}
-        <p class="error-message">{errorMessage}</p>
+        <p class="text-red-500 text-sm">{errorMessage}</p>
       {/if}
   
-      <button type="submit" class="btn-login">Iniciar Sesión</button>
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Iniciar Sesión
+      </button>
     </form>
+
+    <!-- Enlace de "¿Has olvidado tu contraseña?" -->
+    <p class="text-center text-gray-600 mt-4">
+      <span class="underline cursor-pointer">¿Has olvidado tu contraseña?</span>
+    </p>
   </div>
 </main>
   
   <style>
-    .login-background {
-    background-color: #003366; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-    .login-container {
-      max-width: 400px;
-      margin: 5rem auto;
-      padding: 2rem;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-  
-    .logo {
-      width: 150px;
-      height: auto;
-      margin-bottom: 1rem;
-    }
-  
-    .title {
-      font-size: 1.5rem;
-      color: #333;
-      margin-bottom: 2rem;
-    }
-  
     form {
       display: flex;
       flex-direction: column;
@@ -82,25 +91,6 @@
       margin-bottom: 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
-    }
-  
-    .btn-login {
-      background-color: #007BFF;
-      color: white;
-      padding: 0.5rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  
-    .btn-login:hover {
-      background-color: #0056b3;
-    }
-  
-    .error-message {
-      color: red;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
     }
   </style>
   

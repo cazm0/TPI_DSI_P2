@@ -1,7 +1,10 @@
 <script>
   import Navbar from '../components/layout/Navbar.svelte';
   import { onMount } from 'svelte';
-  
+  import '../app.css';
+  onMount(() => {
+    document.title = 'Taller RTO';
+  });
   let today = new Date();
   
   // Función para formatear la fecha
@@ -93,72 +96,60 @@
 
 <Navbar />
 
-<main class="bg-white text-gray-800 p-2">
-  <section class="items-center justify-center text-center">
-    <!-- Título y Fecha/Hora -->
-    <section class="welcome-section">
-      <h1 class="text-5xl font-bold text-gray-800 mb-4" style="font-size:2rem;">{title}</h1>
-      <div class="text-gray-600">
-        <p class="text-lg">{date}</p> <!-- Fecha -->
-        <p class="text-gray-800" style="font-size: 4rem; font-weight: bold; margin: -4px">{time}</p> <!-- Hora -->
-      </div>
-    </section>
+<main class="bg-gray-50 min-h-screen text-gray-800 p-6 flex flex-col items-center">
+  <!-- Título y Fecha/Hora -->
+  <section class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-blue-900 mb-4">{title}</h1>
+    <div>
+      <p class="text-lg text-gray-700">{date}</p>
+      <p class="text-5xl font-bold text-blue-600">{time}</p>
+    </div>
+  </section>
 
-    <!-- Calendario -->
-    <section class="bg-gray-100 p-6 rounded-lg shadow-md mt-8 w-full max-w-[360px] mx-auto">
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <button class="prev-month" on:click="{showPrevMonth}">&lt;</button>
-          <span class="month-year">{month} {year}</span>
-          <button class="next-month" on:click="{showNextMonth}">&gt;</button>
-        </div>
-        <div class="calendar-grid">
-          {#each daysOfWeek as day}
-            <div class="calendar-day-header">{day}</div>
-          {/each}
-          {#each calendarDays as day}
-            <div class="calendar-day">
-              {day}
-            </div>
-          {/each}
-        </div>
-      </div>
-    </section>
+  <!-- Calendario -->
+  <section class="bg-white shadow-md p-6 rounded-lg w-full max-w-md">
+    <div class="flex items-center justify-between mb-4">
+      <button class="text-blue-600 font-bold hover:text-blue-800" on:click="{showPrevMonth}">&lt;</button>
+      <span class="text-lg font-semibold text-gray-800">{month} {year}</span>
+      <button class="text-blue-600 font-bold hover:text-blue-800" on:click="{showNextMonth}">&gt;</button>
+    </div>
+    <div class="grid grid-cols-7 text-center gap-1">
+      {#each daysOfWeek as day}
+        <div class="font-medium text-gray-600">{day}</div>
+      {/each}
+      {#each calendarDays as day}
+        <div class="p-2 text-sm rounded-md {day ? 'bg-gray-100 hover:bg-blue-100 cursor-pointer' : ''}">{day}</div>
+      {/each}
+    </div>
   </section>
 
   <!-- Información del Taller -->
-  <div class="container bg-white p-6 rounded-lg shadow-md mt-8">
-    <!-- Columna izquierda: Información sobre el RTO -->
-    <div class="left-column">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">¿Qué es un RTO?</h2>
-      <p class="text-gray-700 leading-relaxed">
-        Un Registro de Talleres de Automóviles (RTO) permite gestionar de manera eficiente los turnos, 
-        así como administrar la información de los talleres, asegurando una experiencia optimizada para 
-        los usuarios y administradores.
-      </p>
+  <section class="bg-white shadow-md rounded-lg p-6 mt-8 w-full max-w-4xl">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Columna izquierda -->
+      <div class="md:col-span-2">
+        <h2 class="text-2xl font-semibold text-blue-900 mb-4">¿Qué es un RTO?</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Un Registro de Talleres de Automóviles (RTO) permite gestionar de manera eficiente los turnos, 
+          así como administrar la información de los talleres, asegurando una experiencia optimizada para 
+          los usuarios y administradores.
+        </p>
+      </div>
+      <!-- Columna derecha -->
+      <div class="flex justify-center items-center">
+        <a href="/turnos" 
+          class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+          Administración de Turnos
+        </a>
+      </div>
     </div>
-  
-    <!-- Columna derecha: Botón amarillo -->
-    <div class="right-column flex justify-center items-center">
-      <a href="/turnos" 
-         class="adm-button">
-        Administración de Turnos
-      </a>
-    </div>
-  </div>
-  
+  </section>
 </main>
 
 <style>
   main {
   background-color: #ffffff;
   color: #333333;
-}
-.welcome-section {
-  text-align: center;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
 }
 
 h1, h2 {
@@ -176,88 +167,5 @@ h1, h2 {
 .bg-gray-100 {
   background-color: #f3f4f6; /* Gris muy claro para el fondo de la sección de información */
 }
-
-
-.calendar-container {
-  border: 2px solid #ccc;
-  padding: 1rem;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.month-year {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-}
-
-.calendar-day-header {
-  font-weight: bold;
-  text-align: center;
-}
-
-.calendar-day {
-  padding: 8px;
-  text-align: center;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-}
-
-.calendar-day:hover {
-  background-color: #e0e0e0;
-  cursor: pointer;
-}
-
-.prev-month,
-.next-month {
-  background-color: transparent;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: 2fr 1fr; /* 2:1 column ratio */
-  gap: 10px;
-}
-
-.left-column {
-  grid-column: 1;
-}
-
-.right-column {
-  grid-column: 2;
-  display: flex; /* Activa Flexbox */
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  height: 100%; /* Asegura que tome toda la altura del contenedor */
-}
-.adm-button {
-    background-color: #FFA500;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .adm-button:hover {
-    background-color: #FF8C00;
-  }
 
 </style>

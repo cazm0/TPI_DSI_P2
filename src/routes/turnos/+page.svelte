@@ -1,13 +1,16 @@
 <script>
     import Navbar from '../../components/layout/Navbar.svelte';
     import { onMount } from 'svelte';
+    onMount(() => {
+    document.title = 'Turnos';
+    });
     // Simulación de datos de turnos (puedes reemplazarlos con datos reales de una API)
     let turnos = [
       { id: 1, fecha: '2024-11-29', hora: '10:00', nombre: 'Juan', apellido: 'Pérez', patente: 'ABC123' },
       { id: 2, fecha: '2024-11-30', hora: '11:30', nombre: 'María', apellido: 'Gómez', patente: 'DEF456' },
       { id: 3, fecha: '2024-12-01', hora: '09:00', nombre: 'Carlos', apellido: 'López', patente: 'GHI789' }
     ];
-  
+    
     // Variables para el modal
   let showModal = false;
   let turnoToDelete = null;
@@ -35,12 +38,13 @@
   
   <main class="bg-white text-gray-800 p-6">
     <!-- Título central -->
-    <section class="title">
-        <h1 class="text-5xl font-bold text-blue-900" style="font-size:2rem">Turnos</h1>
+    <section class="title text-center my-8">
+      <h1 class="text-4xl font-semibold text-blue-900">Turnos</h1>
     </section>
+
   
     <!-- Tabla de turnos -->
-    <section class="table-container" style="margin: -4px">
+    <section class="table-container mt-6 bg-gray-100 p-6 rounded-lg shadow-lg">
         <table class="turnos-table">
             <thead>
               <tr>
@@ -61,7 +65,7 @@
                   <td>{turno.apellido}</td>
                   <td>{turno.patente}</td>
                   <td>
-                    <a href="turnos/editar" class="edit-btn">Editar</a>
+                    <a href="turnos/{turno.id}" class="edit-btn">Editar</a>
                     <button class="delete-btn" on:click={() => confirmDelete(turno)}>Eliminar</button>
                   </td>
                 </tr>

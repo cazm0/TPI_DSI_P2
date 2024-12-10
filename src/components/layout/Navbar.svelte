@@ -1,6 +1,19 @@
 <script>
+  import { goto } from '$app/navigation';
   import logo from '$lib/../public/SART.png';
-  let isLoggedIn = false;
+  import { isLoggedIn } from '$lib/stores'; // Importamos el store
+  let loggedIn = false;
+
+// Suscribimos el store y reaccionamos al cambio
+isLoggedIn.subscribe(value => {
+  loggedIn = value; // Actualizamos la variable local cuando cambia el store
+});
+
+// Función para manejar el cierre de sesión
+function handleLogout() {
+  isLoggedIn.set(false); // Cambia el estado del store
+  goto('/'); // Redirige al inicio
+}
 </script>
 
 <style>
@@ -40,37 +53,33 @@
   nav a:hover {
     color: #FFA500; /* Resalta los enlaces con un color naranja */
   }
-
-  .login-button {
-    background-color: #FFA500;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .login-button:hover {
-    background-color: #FF8C00;
-  }
 </style>
 
-<nav>
+<nav class="bg-blue-900 text-white px-6 py-4 flex items-center justify-between">
   <!-- Logo alineado a la izquierda -->
-  <div class="logo">
-    <img src={logo} alt="Logo" />
+  <div class="logo flex items-center">
+    <img src={logo} alt="Logo" class="w-16 h-auto" />
   </div>
-  
+
   <!-- Links centrados -->
-  <div class="links">
-    <a href="/">Inicio</a>
-    <a href="/consultas">Consultas</a>
-    <a href="/tarifas">Tarifas</a>
-    <a href="/turnos">Turnos</a>
+  <div class="links flex space-x-6">
+    <a href="/" class="text-white hover:text-orange-400 transition-colors duration-300">Inicio</a>
+    <a href="/consultas" class="text-white hover:text-orange-400 transition-colors duration-300">Consultas</a>
+    <a href="/tarifas" class="text-white hover:text-orange-400 transition-colors duration-300">Tarifas</a>
+    <a href="/turnos" class="text-white hover:text-orange-400 transition-colors duration-300">Turnos</a>
   </div>
 
   <!-- Login alineado a la derecha -->
-  {#if !isLoggedIn}
-    <a href="/login" class="login-button">Iniciar sesión</a>
-  {/if}
+  {#if loggedIn}
+  <button 
+    on:click={handleLogout} 
+    class="text-white px-4 py-2 rounded-md font-bold duration-300">
+    Cerrar sesión
+  </button>
+{:else}
+  <a href="/login" 
+    class="bg-yellow-500 text-white px-4 py-2 rounded-md font-bold hover:bg-yellow-600 transition-colors duration-300">
+    Iniciar sesión
+  </a>
+{/if}
 </nav>

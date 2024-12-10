@@ -1,7 +1,10 @@
 <script>
     import Navbar from '../../../components/layout/Navbar.svelte';
     import { goto } from '$app/navigation'; // Para redirigir
-  
+    import { onMount } from 'svelte';
+    onMount(() => {
+    document.title = 'Agregar Turno';
+    });
     let turno = {
       fecha: '',
       hora: '',
@@ -29,73 +32,158 @@
   </script>
   
   <Navbar />
+
+
+  <div class="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-blue-900 text-center mb-6">Agregar Turno</h1>
   
-  <div class="add-turno-container">
-    <h1 class="text-center text-2xl font-bold text-blue-900">Agregar Turno</h1>
+    <form on:submit|preventDefault={saveTurno} class="space-y-4">
+      <!-- Fecha y Hora alineadas horizontalmente -->
+      <div class="flex space-x-4">
+        <div class="flex-1">
+          <label for="fecha" class="block text-gray-700 font-medium mb-2">Fecha:</label>
+          <input
+            type="date"
+            id="fecha"
+            bind:value={turno.fecha}
+            required
+            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+          />
+        </div>
+        <div class="flex-1">
+          <label for="hora" class="block text-gray-700 font-medium mb-2">Hora:</label>
+          <input
+            type="time"
+            id="hora"
+            bind:value={turno.hora}
+            required
+            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+          />
+        </div>
+      </div>
   
-    <form on:submit|preventDefault={saveTurno}>
-      <label for="fecha">Fecha:</label>
-      <input type="date" id="fecha" bind:value={turno.fecha} required />
+      <!-- Campos de texto -->
+      <div>
+        <label for="nombre" class="block text-gray-700 font-medium mb-2">Nombre:</label>
+        <input
+          type="text"
+          id="nombre"
+          bind:value={turno.nombre}
+          required
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="apellido" class="block text-gray-700 font-medium mb-2">Apellido:</label>
+        <input
+          type="text"
+          id="apellido"
+          bind:value={turno.apellido}
+          required
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="dni" class="block text-gray-700 font-medium mb-2">DNI:</label>
+        <input
+          type="text"
+          id="dni"
+          bind:value={turno.dni}
+          required
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="marca" class="block text-gray-700 font-medium mb-2">Marca:</label>
+        <input
+          type="text"
+          id="marca"
+          bind:value={turno.marca}
+          required
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="modelo" class="block text-gray-700 font-medium mb-2">Modelo:</label>
+        <input
+          type="text"
+          id="modelo"
+          bind:value={turno.modelo}
+          required
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="patente" class="block text-gray-700 font-medium mb-2">Patente:</label>
+        <input
+          type="text"
+          id="patente"
+          bind:value={turno.patente}
+          required
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="tipoVehiculo" class="block text-gray-700 font-medium mb-2">Tipo de Vehículo:</label>
+        <select
+          id="tipoVehiculo"
+          bind:value={turno.tipoVehiculo}
+          required
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+        >
+          <option value="" disabled selected>Selecciona un tipo</option>
+          <option value="Automóvil">Automóvil</option>
+          <option value="Camioneta">Camioneta</option>
+          <option value="Camión">Camión</option>
+          <option value="Moto">Moto</option>
+          <option value="Otros">Otros</option>
+        </select>
+      </div>
   
-      <label for="hora">Hora:</label>
-      <input type="time" id="hora" bind:value={turno.hora} required />
-  
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" bind:value={turno.nombre} required />
-  
-      <label for="apellido">Apellido:</label>
-      <input type="text" id="apellido" bind:value={turno.apellido} required />
-  
-      <label for="dni">DNI:</label>
-      <input type="text" id="dni" bind:value={turno.dni} required />
-  
-      <label for="marca">Marca:</label>
-      <input type="text" id="marca" bind:value={turno.marca} required />
-  
-      <label for="modelo">Modelo:</label>
-      <input type="text" id="modelo" bind:value={turno.modelo} required />
-  
-      <label for="patente">Patente:</label>
-      <input type="text" id="patente" bind:value={turno.patente} required />
-  
-      <label for="tipoVehiculo">Tipo de Vehículo:</label>
-      <select id="tipoVehiculo" bind:value={turno.tipoVehiculo} required>
-        <option value="" disabled selected>Selecciona un tipo</option>
-        <option value="Automóvil">Automóvil</option>
-        <option value="Camioneta">Camioneta</option>
-        <option value="Camión">Camión</option>
-        <option value="Moto">Moto</option>
-        <option value="Otros">Otros</option>
-      </select>
-      <div class="button-group">
-        
-        <a href="/turnos" class="btn-cancel">Cancelar</a>
-        <button type="submit" class="btn-save">Guardar Turno</button>
+      <!-- Botones -->
+      <div class="flex justify-between mt-6">
+        <a
+          href="/turnos"
+          class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-400 transition-colors"
+        >
+          Cancelar
+        </a>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-400 transition-colors"
+        >
+          Guardar Turno
+        </button>
       </div>
     </form>
   </div>
   
+  <!-- Popup -->
   {#if showPopup}
-  <div class="popup-container">
-    <div class="popup-content">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Turno guardado exitosamente</h2>
-      <div class="popup-buttons">
-        <button class="btn" on:click={() => closePopup('/')}>Ir al Inicio</button>
-        <button class="btn" on:click={() => closePopup('/turnos')}>Ver Turnos</button>
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">
+          Turno guardado exitosamente
+        </h2>
+        <div class="flex justify-center space-x-4">
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-400 transition-colors"
+            on:click={() => closePopup('/')}
+          >
+            Ir al Inicio
+          </button>
+          <button
+            class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-400 transition-colors"
+            on:click={() => closePopup('/turnos')}
+          >
+            Ver Turnos
+          </button>
+        </div>
       </div>
     </div>
-  </div>
   {/if}
   
   <style>
-    .add-turno-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 1rem;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
   
     form {
       display: flex;
@@ -111,76 +199,6 @@
       margin-bottom: 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
-    }
-  
-    .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    }
-    .btn-save {
-      background-color: #007BFF;
-      color: white;
-      padding: 0.7rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  
-    .btn-save:hover {
-      background-color: #0056b3;
-    }
-    .btn-cancel {
-    background-color: #f44336;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    }
-
-    .btn-cancel:hover {
-    background-color: #e53935;
-    }
-  
-    /* Estilo del popup */
-    .popup-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-  
-    .popup-content {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-  
-    .popup-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-  
-    .btn {
-      background-color: #ccc;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  
-    .btn:hover {
-      background-color: #ccc;
     }
   </style>
   
