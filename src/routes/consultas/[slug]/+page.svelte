@@ -11,15 +11,15 @@
   let consultas = [
     { id: 1, nombre: 'Juan', apellido: 'Pérez', mensajes: [
       ['cliente', 'Hola, quiero saber algo.'],
-      ['cliente', '¿Cómo puedo saber el estado de mi pedido?'],
+      ['cliente', '¿Cómo puedo saber detalles de mi turno?'],
       ['usuario', '¡Hola! Soy del servicio de atención al cliente. Te ayudaré con tu consulta.'],
-      ['cliente', 'Gracias, ¿puedes decirme si ya está en camino?']
+      ['cliente', 'Gracias, ¿puedo cambiar la fecha?']
     ] },
-    { id: 2, nombre: 'María', apellido: 'Gómez', mensajes: [['cliente', '¿Cómo puedo mejorar mi cuenta?']] },
+    { id: 2, nombre: 'María', apellido: 'Gómez', mensajes: [['cliente', '¿Cómo puedo pedir un turno para varios automóviles?']] },
     { id: 3, nombre: 'Carlos', apellido: 'López', mensajes: [
-      ['cliente', 'Quiero saber algo sobre mi pedido.'],
+      ['cliente', 'Quiero saber algo sobre sus servicios.'],
       ['usuario', '¡Hola! Soy del servicio de atención al cliente. ¿Cuál es tu consulta?'],
-      ['cliente', '¿Dónde puedo realizar el seguimiento del envío?']
+      ['cliente', '¿Realizan revisiones a camiones de carga?']
     ] },
   ];
 
