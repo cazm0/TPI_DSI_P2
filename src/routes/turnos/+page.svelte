@@ -1,6 +1,11 @@
 <script>
     import Navbar from '../../components/layout/Navbar.svelte';
     import { onMount } from 'svelte';
+    import { isLoggedIn } from '$lib/stores';
+    import { get } from 'svelte/store';
+
+    // Verifica si el usuario está logueado
+    $: loggedIn = get(isLoggedIn); // Obtiene el estado actual de isLoggedIn
     onMount(() => {
     document.title = 'Turnos';
     });
@@ -35,8 +40,9 @@
   </script>
   
   <Navbar />
-  
+  {#if loggedIn}
   <main class="bg-white text-gray-800 p-6">
+
     <!-- Título central -->
     <section class="title text-center my-8">
       <h1 class="text-4xl font-semibold text-blue-900">Turnos</h1>
@@ -91,8 +97,28 @@
           </div>
           
       </section>
-      
-  </main>
+    </main>
+    {:else}
+    <main class="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full text-center">
+        <section>
+          <h1 class="text-2xl font-bold text-gray-800 mb-4">Solicitar turnos</h1>
+          <p class="text-gray-600 mb-4">
+            Para solicitar un turno de revisión obligatoria, es necesario iniciar sesión en nuestra plataforma. Si aún no tienes una cuenta, puedes <a href="/login" class="text-blue-500 hover:text-blue-600 font-semibold">crear una cuenta aquí</a>.
+          </p>
+          <p class="text-gray-600 mb-6">
+            Una vez que te registres e inicies sesión, podrás gestionar tus turnos de revisión y acceder a todos los servicios disponibles de manera sencilla.
+          </p>
+          <!-- Botón para volver al inicio -->
+          <a href="/" 
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Volver al inicio
+          </a>
+        </section>
+      </div>
+    </main>
+    {/if}
+
   
   <style>
     main {

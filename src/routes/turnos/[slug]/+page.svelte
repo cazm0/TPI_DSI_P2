@@ -2,6 +2,11 @@
   import { page } from '$app/stores'; // Para obtener parámetros de la URL
   import Navbar from '../../../components/layout/Navbar.svelte';
   import { onMount } from 'svelte';
+  import { isLoggedIn } from '$lib/stores';
+  import { get } from 'svelte/store';
+
+    // Verifica si el usuario está logueado
+  $: loggedIn = get(isLoggedIn); // Obtiene el estado actual de isLoggedIn
   
   // Datos simulados de turnos
   let turnos = [
@@ -35,6 +40,7 @@ const closePopup = (route) => {
 <Navbar />
 
 {#if turno}
+  {#if loggedIn}
 <div class="edit-turno-container max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
   <h1 class="text-2xl font-bold text-center text-blue-800 mb-6">Modificar Turno</h1>
 
@@ -112,8 +118,23 @@ const closePopup = (route) => {
         Guardar Cambios
       </button>
     </div>
-  </form>
-</div>
+  </form></div>
+  {:else}
+  <div class="min-h-screen bg-white flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full text-center">
+      <section>
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">Acceso Denegado</h1>
+        <p class="text-gray-600 mb-6">Por favor, inicia sesión para acceder a toda la información.</p>
+        <!-- Contenido público -->
+        <a href="/" 
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+          Volver al inicio
+        </a>
+      </section>
+    </div>
+  </div>
+  {/if}
+
 <!-- Popup -->
 {#if showPopup}
   <div class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">

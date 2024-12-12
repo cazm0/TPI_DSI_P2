@@ -2,6 +2,11 @@
     import Navbar from '../../../components/layout/Navbar.svelte';
     import { goto } from '$app/navigation'; // Para redirigir
     import { onMount } from 'svelte';
+    import { isLoggedIn } from '$lib/stores';
+    import { get } from 'svelte/store';
+
+    // Verifica si el usuario está logueado
+    $: loggedIn = get(isLoggedIn); // Obtiene el estado actual de isLoggedIn
     onMount(() => {
     document.title = 'Agregar Turno';
     });
@@ -34,9 +39,10 @@
   <Navbar />
 
 
-  <div class="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-blue-900 text-center mb-6">Agregar Turno</h1>
-  
+
+    {#if loggedIn}
+  <div class="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">    
+  <h1 class="text-2xl font-bold text-blue-900 text-center mb-6">Agregar Turno</h1>
     <form on:submit|preventDefault={saveTurno} class="space-y-4">
       <!-- Fecha y Hora alineadas horizontalmente -->
       <div class="flex space-x-4">
@@ -157,6 +163,22 @@
       </div>
     </form>
   </div>
+    {:else}
+    <div class="min-h-screen bg-white flex items-center justify-center">
+      <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full text-center">
+        <section>
+          <h1 class="text-2xl font-bold text-gray-800 mb-4">Acceso Denegado</h1>
+          <p class="text-gray-600 mb-6">Por favor, inicia sesión para acceder a toda la información.</p>
+          <!-- Contenido público -->
+          <a href="/" 
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Volver al inicio
+          </a>
+        </section>
+      </div>
+    </div>
+    {/if}
+
   
   <!-- Popup -->
   {#if showPopup}

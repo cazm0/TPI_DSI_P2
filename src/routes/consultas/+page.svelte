@@ -5,6 +5,11 @@
     document.title = 'Consultas';
     });
     import { goto } from "$app/navigation"; // Para redirigir
+    import { isLoggedIn } from '$lib/stores';
+    import { get } from 'svelte/store';
+
+    // Verifica si el usuario está logueado
+    $: loggedIn = get(isLoggedIn); // Obtiene el estado actual de isLoggedIn
     let consultas = [
       {
         id: 1,
@@ -29,9 +34,10 @@
       },
     ];
   </script>
-  
-  <Navbar />
+  <Navbar /> 
+    {#if loggedIn}
   <main class="bg-white text-gray-800 p-4">
+ 
     <!-- Título central -->
     <section class="title text-center my-8">
       <h1 class="text-4xl font-semibold text-blue-900">Consultas</h1>
@@ -65,8 +71,28 @@
             {/each}
           </tbody>
         </table>
-      </section>
-  </main>
+      </section>  </main>
+    {:else}
+    <main class="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full text-center">
+        <section>
+          <h1 class="text-2xl font-bold text-gray-800 mb-4">Consultas al taller</h1>
+          <p class="text-gray-600 mb-4">
+            Para realizar consultas relacionadas con el taller y acceder a todos los servicios, es necesario iniciar sesión. Si aún no tienes una cuenta, puedes <a href="/login" class="text-blue-500 hover:text-blue-600 font-semibold">crear una cuenta aquí</a>.
+          </p>
+          <p class="text-gray-600 mb-6">
+            Una vez que te registres y inicies sesión, podrás gestionar tus consultas y acceder a todas las opciones disponibles.
+          </p>
+          <!-- Botón para volver al inicio -->
+          <a href="/" 
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Volver al inicio
+          </a>
+        </section>
+      </div>
+    </main>
+    {/if}
+
 <style>
   /* Estilos previos de la tabla */
   th:hover {

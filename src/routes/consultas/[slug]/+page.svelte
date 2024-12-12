@@ -2,6 +2,11 @@
   import { page } from '$app/stores'; // Para acceder a los parámetros de la URL
   import Navbar from '../../../components/layout/Navbar.svelte';
   import { onMount } from 'svelte';
+  import { isLoggedIn } from '$lib/stores';
+  import { get } from 'svelte/store';
+
+  // Verifica si el usuario está logueado
+  $: loggedIn = get(isLoggedIn); // Obtiene el estado actual de isLoggedIn
   // Datos simulados
   let consultas = [
     { id: 1, nombre: 'Juan', apellido: 'Pérez', mensajes: [
@@ -48,6 +53,7 @@
 <Navbar />
 
 <main class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
+  {#if loggedIn}
   <section>
     {#if consulta}
       <h2 class="text-2xl font-semibold text-blue-900 mb-4">Chat de {consulta.nombre} {consulta.apellido}</h2>
@@ -77,6 +83,13 @@
       <p>Consulta no encontrada</p>
     {/if}
   </section>
+  {:else}
+      <section>
+        <h1>Información General</h1>
+        <p>Por favor, inicia sesión para acceder a toda la información.</p>
+        <!-- Contenido público -->
+      </section>
+  {/if}
 </main>
 
 <style>
