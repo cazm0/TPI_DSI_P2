@@ -100,20 +100,33 @@
     </main>
     {:else}
     <main class="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full text-center">
-        <section>
-          <h1 class="text-2xl font-bold text-gray-800 mb-4">Solicitar turnos</h1>
-          <p class="text-gray-600 mb-4">
-            Para solicitar un turno de revisión obligatoria, es necesario iniciar sesión en nuestra plataforma. Si aún no tienes una cuenta, puedes <a href="/login" class="text-blue-500 hover:text-blue-600 font-semibold">crear una cuenta aquí</a>.
+      <div class="bg-white shadow-lg rounded-lg p-8 max-w-5xl w-full flex">
+        <!-- Sección de Información -->
+        <section class="flex-1 pr-6">
+          <h1 class="text-3xl font-bold text-gray-800 mb-4">Turnos para Revisión Técnica Obligatoria</h1>
+          <p class="text-gray-600 mb-6">
+            En nuestro taller, ofrecemos un servicio eficiente y profesional para la revisión técnica obligatoria de tu vehículo. 
+            Garantizamos que cumpla con todas las normativas vigentes, asegurando la seguridad y el cuidado del medio ambiente.
           </p>
           <p class="text-gray-600 mb-6">
-            Una vez que te registres e inicies sesión, podrás gestionar tus turnos de revisión y acceder a todos los servicios disponibles de manera sencilla.
+            Puedes solicitar tu turno en línea de manera rápida y sencilla. Selecciona la fecha y hora que mejor se adapte a tus necesidades 
+            y evita largas esperas en nuestras instalaciones.
           </p>
-          <!-- Botón para volver al inicio -->
-          <a href="/" 
+          <!-- Botón para redirigir a la página de solicitud de turnos -->
+          <a href="/turnos/solicitar" 
             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            Volver al inicio
+            Solicitar Turno
           </a>
+        </section>
+    
+        <!-- Carrusel de Imágenes -->
+        <section class="flex-1 overflow-x-auto">
+          <div class="flex space-x-4 snap-x snap-mandatory">
+            <img src="/src/public/taller1.jpeg" alt="Imagen del taller 1" class="w-96 h-auto rounded-lg snap-center" />
+            <img src="/src/public/taller2.jpeg" alt="Imagen del taller 2" class="w-96 h-auto rounded-lg snap-center" />
+            <img src="/src/public/taller3.jpeg" alt="Imagen del taller 3" class="w-96 h-auto rounded-lg snap-center" />
+            <img src="/src/public/taller4.jpeg" alt="Imagen del taller 3" class="w-96 h-auto rounded-lg snap-center" />
+          </div>
         </section>
       </div>
     </main>
@@ -125,7 +138,6 @@
       background-color: #ffffff;
       color: #333333;
     }
-  
     table {
       width: 100%;
       border-collapse: collapse;

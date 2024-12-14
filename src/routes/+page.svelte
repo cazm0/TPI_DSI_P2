@@ -139,7 +139,7 @@
       <div class="flex justify-center items-center">
         <a href="/turnos" 
           class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-          Administración de Turnos
+          Solicitar turno
         </a>
       </div>
     </div>
