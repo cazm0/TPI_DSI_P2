@@ -78,7 +78,7 @@
         <section>
           <h1 class="text-2xl font-bold text-gray-800 mb-4">Consultas al taller</h1>
           <p class="text-gray-600 mb-4">
-            Para realizar consultas relacionadas con el taller y acceder a todos los servicios, es necesario iniciar sesión. Si aún no tienes una cuenta, puedes <a href="/login" class="text-blue-500 hover:text-blue-600 font-semibold">crear una cuenta aquí</a>.
+            Para realizar consultas relacionadas con el taller es necesario iniciar sesión. Si aún no tienes una cuenta, puedes <a href="/login" class="text-blue-500 hover:text-blue-600 font-semibold">crear una cuenta aquí</a>.
           </p>
           <p class="text-gray-600 mb-6">
             Una vez que te registres y inicies sesión, podrás gestionar tus consultas y acceder a todas las opciones disponibles.

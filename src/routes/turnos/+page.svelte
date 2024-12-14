@@ -3,7 +3,10 @@
     import { onMount } from 'svelte';
     import { isLoggedIn } from '$lib/stores';
     import { get } from 'svelte/store';
-
+    import taller1 from '$lib/../public/taller1.jpeg';
+    import taller2 from '$lib/../public/taller2.jpeg';
+    import taller3 from '$lib/../public/taller3.jpeg';
+    import taller4 from '$lib/../public/taller4.jpeg';
     // Verifica si el usuario está logueado
     $: loggedIn = get(isLoggedIn); // Obtiene el estado actual de isLoggedIn
     onMount(() => {
@@ -122,10 +125,10 @@
         <!-- Carrusel de Imágenes -->
         <section class="flex-1 overflow-x-auto">
           <div class="flex space-x-4 snap-x snap-mandatory">
-            <img src="/src/public/taller1.jpeg" alt="Imagen del taller 1" class="w-96 h-auto rounded-lg snap-center" />
-            <img src="/src/public/taller2.jpeg" alt="Imagen del taller 2" class="w-96 h-auto rounded-lg snap-center" />
-            <img src="/src/public/taller3.jpeg" alt="Imagen del taller 3" class="w-96 h-auto rounded-lg snap-center" />
-            <img src="/src/public/taller4.jpeg" alt="Imagen del taller 3" class="w-96 h-auto rounded-lg snap-center" />
+            <img src="{taller1}" alt="Imagen del taller 1" class="w-96 h-auto rounded-lg snap-center" />
+            <img src="{taller2}" alt="Imagen del taller 2" class="w-96 h-auto rounded-lg snap-center" />
+            <img src="{taller3}" alt="Imagen del taller 3" class="w-96 h-auto rounded-lg snap-center" />
+            <img src="{taller4}" alt="Imagen del taller 3" class="w-96 h-auto rounded-lg snap-center" />
           </div>
         </section>
       </div>
